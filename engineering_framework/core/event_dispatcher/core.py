@@ -60,6 +60,9 @@ class AsyncEventDispatcher(EventDispatcher):
             if asyncio.iscoroutinefunction(handler):
                 tasks.append(handler(event))  # type: ignore[arg-type]
             else:
-                handler(event)  # type: ignore[call-arg]
+                raise TypeError(
+                    f"Sync handler {handler!r} registered on AsyncEventDispatcher. "
+                    "Use SyncEventDispatcher for sync handlers."
+                )
         if tasks:
             await asyncio.gather(*tasks)

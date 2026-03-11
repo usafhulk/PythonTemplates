@@ -8,6 +8,15 @@ from .interfaces import Container
 logger = logging.getLogger(__name__)
 T = TypeVar("T")
 
+_signature_cache: Dict[type, inspect.Signature] = {}
+
+
+def _get_signature(cls: type) -> inspect.Signature:
+    """Return (and cache) the __init__ signature for a class."""
+    if cls not in _signature_cache:
+        _signature_cache[cls] = inspect.signature(cls.__init__)
+    return _signature_cache[cls]
+
 
 class DIContainer(Container):
     """Lightweight DI container with constructor injection."""
@@ -44,7 +53,7 @@ class DIContainer(Container):
         return instance  # type: ignore[return-value]
 
     def _build(self, cls: type) -> Any:
-        sig = inspect.signature(cls.__init__)
+        sig = _get_signature(cls)
         kwargs = {}
         for name, param in sig.parameters.items():
             if name == "self":

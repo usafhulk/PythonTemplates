@@ -46,7 +46,7 @@ class SlidingWindowRateLimiter(RateLimiter):
     def __init__(self, max_requests: int, window_seconds: float) -> None:
         self.max_requests = max_requests
         self.window_seconds = window_seconds
-        self._timestamps: list = []
+        self._timestamps: list[float] = []
         self._lock = threading.Lock()
 
     def acquire(self, tokens: int = 1) -> bool:
