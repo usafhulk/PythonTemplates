@@ -6,7 +6,7 @@ Template classes and helpers for building automated test suites.
 Exports:
     BaseTest           -- Base test class with lifecycle hooks and retry logic
     APITestHelper      -- HTTP REST API testing helper
-    DataFactory    -- Factory for generating synthetic test data
+    DataFactory        -- Factory for generating synthetic test data
     PerformanceTest    -- Template for performance and load testing
 """
 

@@ -9,9 +9,9 @@ dependencies beyond the standard library.
 
 Usage::
 
-    from wingbrace.automated_testing import TestDataFactory
+    from wingbrace.automated_testing import DataFactory
 
-    factory = TestDataFactory(seed=42)
+    factory = DataFactory(seed=42)
     user = factory.user()
     print(user)
     # {'id': 'a1b2c3...', 'first_name': 'Alice', 'last_name': 'Smith',
